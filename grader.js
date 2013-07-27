@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 /*
+url: https://class.coursera.org/startup-001/assignment/view?assignment_id=8
+
 Automatically grade files for the presence of specified HTML tags/attributes.
 Uses commander.js and cheerio. Teaches command line application development
 and basic DOM parsing.
@@ -65,6 +67,8 @@ if(require.main == module) {
     program
         .option('-c, --checks <check_file>', 'Path to checks.json', clone(assertFileExists), CHECKSFILE_DEFAULT)
         .option('-f, --file <html_file>', 'Path to index.html', clone(assertFileExists), HTMLFILE_DEFAULT)
+        // TODO .or() --> either OR this
+        .option('-u, --url <file_from_url>', 'Path to index.html', assertUrlExists)
         .parse(process.argv);
     var checkJson = checkHtmlFile(program.file, program.checks);
     var outJson = JSON.stringify(checkJson, null, 4);
